@@ -52,7 +52,7 @@ public class OTPTextField: UITextField {
         case .bottomBorder:
             bottomBorder.frame = .init(x: .zero, y: frame.maxY, width: bounds.width, height: borderHeight)
         case .fullBorder:
-            break
+            layer.borderWidth = borderHeight
         }
     }
 }
