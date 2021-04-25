@@ -14,6 +14,9 @@ public class FNMOTPFields: UIView {
     public var currentOTP = ""
     
     private var textFields = [OTPTextField]()
+    
+    public var layout: OTPTextField.Layout = .bottomBorder
+    
     @IBInspectable
     public var borderColor: UIColor = .red {
         didSet {
@@ -58,6 +61,7 @@ public class FNMOTPFields: UIView {
             } else {
                 textField.textContentType = .none
             }
+            textField.layout = layout
             textField.borderHeight = borderHeight
             textField.borderColor = borderColor
             textFields.append(textField)

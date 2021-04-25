@@ -7,13 +7,23 @@
 
 import UIKit
 
-class OTPTextField: UITextField {
+public class OTPTextField: UITextField {
     
+    var layout: Layout = .bottomBorder
     
     var borderHeight: CGFloat = 1
     var bottomBorder = CALayer()
     
-    var borderColor: UIColor = .red { didSet { bottomBorder.backgroundColor = borderColor.cgColor} }
+    var borderColor: UIColor = .red {
+        didSet {
+            switch layout {
+            case .bottomBorder:
+                bottomBorder.backgroundColor = borderColor.cgColor
+            case .fullBorder:
+                layer.borderColor = borderColor.cgColor
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +36,30 @@ class OTPTextField: UITextField {
     }
     
     private func setup() {
-        layer.addSublayer(bottomBorder)
-        bottomBorder.backgroundColor = borderColor.cgColor
+        switch layout {
+        case .bottomBorder:
+            layer.addSublayer(bottomBorder)
+            bottomBorder.backgroundColor = borderColor.cgColor
+        case .fullBorder:
+            layer.borderWidth = borderHeight
+            layer.borderColor = borderColor.cgColor
+        }
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
-        bottomBorder.frame = .init(x: .zero, y: frame.maxY, width: bounds.width, height: borderHeight)
+        switch layout {
+        case .bottomBorder:
+            bottomBorder.frame = .init(x: .zero, y: frame.maxY, width: bounds.width, height: borderHeight)
+        case .fullBorder:
+            break
+        }
+    }
+}
+
+public extension OTPTextField {
+    enum Layout {
+        case bottomBorder
+        case fullBorder
     }
 }
