@@ -32,6 +32,13 @@ public class FNMOTPFields: UIView {
     }
     
     @IBInspectable
+    public var borderRadius: CGFloat = 1 {
+        didSet {
+            textFields.forEach { $0.borderRadius = borderRadius }
+        }
+    }
+    
+    @IBInspectable
     public var numberOfOTP: Int = 6 {
         didSet {
             setLayout()

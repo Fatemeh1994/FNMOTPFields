@@ -11,6 +11,7 @@ public class OTPTextField: UITextField {
     
     var layout: Layout = .bottomBorder
     
+    var borderRadius: CGFloat = .zero
     var borderHeight: CGFloat = 1
     var bottomBorder = CALayer()
     
@@ -51,6 +52,7 @@ public class OTPTextField: UITextField {
         switch layout {
         case .bottomBorder:
             bottomBorder.frame = .init(x: .zero, y: frame.maxY, width: bounds.width, height: borderHeight)
+            bottomBorder.cornerRadius = borderRadius
         case .fullBorder:
             layer.borderWidth = borderHeight
         }
