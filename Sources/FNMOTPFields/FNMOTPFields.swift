@@ -10,8 +10,14 @@ import UIKit
 
 public class FNMOTPFields: UIView {
     
-    public var otpDidChange: ((String)->())?
+    public var otpDidChange: ((String) -> ())?
     public var currentOTP = ""
+    @IBInspectable
+    public var isSecure: Bool = false {
+        didSet {
+            textFields.forEach { $0.isSecureTextEntry = isSecure }
+        }
+    }
     
     private var textFields = [OTPTextField]()
     
@@ -68,6 +74,7 @@ public class FNMOTPFields: UIView {
             } else {
                 textField.textContentType = .none
             }
+            textField.isSecureTextEntry = isSecure
             textField.layout = layout
             textField.borderHeight = borderHeight
             textField.borderColor = borderColor
