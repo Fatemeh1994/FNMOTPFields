@@ -47,6 +47,11 @@ public class OTPTextField: UITextField {
         }
     }
     
+    public override func deleteBackward() {
+           super.deleteBackward()
+           // do your work here
+       }
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         switch layout {
