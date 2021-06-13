@@ -78,6 +78,17 @@ public class FNMOTPFields: UIView {
             textField.layout = layout
             textField.borderHeight = borderHeight
             textField.borderColor = borderColor
+            textField.deleteBackwardHandler = { [weak self] textField in
+                guard let self = self else { return }
+                let index = self.textFields.firstIndex(of: textField)!
+                if self.textFields.indices.contains(index - 1) {
+                    self.textFields[index - 1].text = .init()
+                    self.textFields[index - 1].becomeFirstResponder()
+                } else {
+                    textField.text = .init()
+                }
+                
+            }
             textFields.append(textField)
             mainStackView.addArrangedSubview(textField)
             if index == .zero, showKeyboardOnLaunch {

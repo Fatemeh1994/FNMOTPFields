@@ -14,6 +14,7 @@ public class OTPTextField: UITextField {
     var borderRadius: CGFloat = .zero
     var borderHeight: CGFloat = 1
     var bottomBorder = CALayer()
+    var deleteBackwardHandler: ((OTPTextField) -> ())?
     
     var borderColor: UIColor = .red {
         didSet {
@@ -48,9 +49,8 @@ public class OTPTextField: UITextField {
     }
     
     public override func deleteBackward() {
-           super.deleteBackward()
-           // do your work here
-       }
+        deleteBackwardHandler?(self)
+    }
 
     public override func layoutSubviews() {
         super.layoutSubviews()
