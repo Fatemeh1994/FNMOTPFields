@@ -51,6 +51,12 @@ public class FNMOTPFields: UIView {
         }
     }
     
+    public var font: UIFont = UIFont.systemFont(ofSize: 24) {
+        didSet {
+            setLayout()
+        }
+    }
+    
     @IBInspectable
     public var showKeyboardOnLaunch: Bool = false { didSet { if showKeyboardOnLaunch { textFields.first?.becomeFirstResponder() } } }
     
@@ -65,6 +71,7 @@ public class FNMOTPFields: UIView {
 
         for index in 0..<numberOfOTP {
             let textField = OTPTextField()
+            textField.font = font
             textField.delegate = self
             textField.backgroundColor = .clear
             textField.textAlignment = .center
